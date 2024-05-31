@@ -1,6 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import video from "../../assets/video/video.mp4";
+import PackagesCard from "../../Components/PackagesCard/PackagesCard";
 const TourismAndGuide = () => {
   return (
     <div className="lg:max-w-7xl lg:mx-auto">
@@ -34,7 +35,11 @@ const TourismAndGuide = () => {
             </h2>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 md:gap-4 gap-4">
+              <PackagesCard></PackagesCard>
+              <PackagesCard></PackagesCard>
+              <PackagesCard></PackagesCard>
+            </div>
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>
