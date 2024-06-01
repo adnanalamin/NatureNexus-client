@@ -2,6 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import video from "../../assets/video/video.mp4";
 import PackagesCard from "../../Components/PackagesCard/PackagesCard";
+import MeetTourGuides from "../../Components/MeetTourGuides/MeetTourGuides";
 const TourismAndGuide = () => {
   return (
     <div className="lg:max-w-7xl lg:mx-auto">
@@ -18,11 +19,11 @@ const TourismAndGuide = () => {
       </div>
       <div className="mt-16">
         <Tabs>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center ">
             <TabList>
-              <Tab>Overview</Tab>
-              <Tab> Our Packages</Tab>
-              <Tab> Meet Our Tour Guides</Tab>
+              <Tab><span className="font-poppins font-semibold text-base">Overview</span></Tab>
+              <Tab><span className="font-poppins font-semibold text-base">Our Packages</span></Tab>
+              <Tab><span className="font-poppins font-semibold text-base">Meet Our Tour Guides</span></Tab>
             </TabList>
           </div>
 
@@ -40,9 +41,12 @@ const TourismAndGuide = () => {
               <PackagesCard></PackagesCard>
               <PackagesCard></PackagesCard>
             </div>
+            <div className="text-center mt-10 ">
+              <button className="btn w-2/4 font-poppins font-semibold text-base text-white bg-[#2C3892] hover:bg-[#3945a1]">All Packages</button>
+            </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <MeetTourGuides></MeetTourGuides>
           </TabPanel>
         </Tabs>
       </div>

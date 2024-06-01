@@ -63,7 +63,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navitems}</ul>
         </div>
         <div className="navbar-end">
-          <button className="btn bg-[#51ADE5] lg:mr-2 font-poppins text-white rounded-xl hover:bg-[#4c9aca]">
+          <button className="btn bg-[#51ADE5] hover:bg-[#4c9aca] lg:mr-2 font-poppins text-white rounded-xl">
             Login
           </button>
           <button className="btn lg:flex hidden bg-[#51ADE5] font-poppins text-white rounded-xl hover:bg-[#4c9aca]">
