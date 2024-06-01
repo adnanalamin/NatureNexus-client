@@ -24,7 +24,7 @@ const Navbar = () => {
   );
   return (
     <div className="lg:max-w-7xl lg:mx-auto">
-      <div className="navbar bg-base-100">
+      <div className="navbar  bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -63,12 +63,16 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navitems}</ul>
         </div>
         <div className="navbar-end">
+          <Link to="/login">
           <button className="btn bg-[#51ADE5] hover:bg-[#4c9aca] lg:mr-2 font-poppins text-white rounded-xl">
             Login
           </button>
+          </Link>
+          <Link to="/register">
           <button className="btn lg:flex hidden bg-[#51ADE5] font-poppins text-white rounded-xl hover:bg-[#4c9aca]">
             Register
           </button>
+          </Link>
         </div>
       </div>
     </div>
