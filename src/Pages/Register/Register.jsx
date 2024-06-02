@@ -1,9 +1,71 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import registerImg from "../../assets/image/Login.jpg";
 import registerbg from "../../assets/image/register.png";
 import { FiUserPlus } from "react-icons/fi";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosPublic from "./../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
+  const { createUser, updateUserProfile, user, setUser } =
+    useContext(AuthContext);
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = async (data) => {
+    const { name, photo, email, password } = data;
+    await createUser(email, password)
+    .then(async ()=>{
+      await updateUserProfile(name, photo)
+      .then(() => {
+        setUser({ ...user?.user, photoURL: photo, displayName: name });
+        const userInfo = {
+          name: name,
+          email: email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            reset();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "User created successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            Navigate("/");
+          }else{
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "User created successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      })
+      
+    })
+    .catch(error => {
+      const title = error.message.split(/[\]():)]+/);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: title,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    })
+    
+    
+  };
   return (
     <div>
       <div
@@ -39,44 +101,89 @@ const Register = () => {
                   Hey enter your details to create your account
                 </p>
               </div>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-xs flex flex-col gap-4">
-                  <input
-                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    type="text"
-                    placeholder="Enter your name"
-                  />
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full flex-1 mt-8"
+              >
+                <div className="">
+                  <div className="mx-auto max-w-xs flex flex-col gap-4">
+                    <input
+                      {...register("name", { required: true })}
+                      aria-invalid={errors.name ? "true" : "false"}
+                      className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="text"
+                      placeholder="Enter your name"
+                    />
+                    {errors.name?.type === "required" && (
+                      <p className="font-poppins text-red-700" role="alert">
+                        Name is required
+                      </p>
+                    )}
 
-                  <input
-                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    type="text"
-                    placeholder="Enter your Photo URL"
-                  />
-                  <input
-                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    type="email"
-                    placeholder="Enter your email"
-                  />
-                  <input
-                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    type="password"
-                    placeholder="Password"
-                  />
-                  <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                    <FiUserPlus className="w-6 h-6 -ml-2"></FiUserPlus>
-                    <span className="ml-3">Register</span>
-                  </button>
-                  <p className="mt-6 text-base font-roboto text-gray-600 text-center">
-                    Already have an account?{" "}
-                    <Link to="/login">
-                      {" "}
-                      <span className="text-blue-900 font-semibold">
-                        Log in
-                      </span>
-                    </Link>
-                  </p>
+                    <input
+                      {...register("photo", { required: true })}
+                      aria-invalid={errors.photo ? "true" : "false"}
+                      className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="text"
+                      placeholder="Enter your Photo URL"
+                    />
+                    {errors.photo?.type === "required" && (
+                      <p className="font-poppins text-red-700" role="alert">
+                        PhotoURL is required
+                      </p>
+                    )}
+                    <input
+                      {...register("email", {
+                        required: "Email Address is required",
+                        pattern:
+                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                      })}
+                      aria-invalid={errors.email ? "true" : "false"}
+                      className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="email"
+                      placeholder="Enter your email"
+                    />
+                    {errors.email && <p role="alert">{errors.mail.message}</p>}
+                    <input
+                      {...register("password", {
+                        required: "Password is required",
+                        pattern: {
+                          value:
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/,
+                          message:
+                            "Password must be 8 characters long and include at least one lowercase letter, one uppercase letter, one special character, and one number.",
+                        },
+                      })}
+                      className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="password"
+                      placeholder="Password"
+                    />
+                    {errors.password?.type === "required" && (
+                      <p className="font-poppins text-red-700" role="alert">
+                        Password is required
+                      </p>
+                    )}
+                    {errors.password?.type === "pattern" && (
+                      <p className="font-poppins text-red-700" role="alert">
+                        {errors.password.message}
+                      </p>
+                    )}
+                    <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                      <FiUserPlus className="w-6 h-6 -ml-2"></FiUserPlus>
+                      <span className="ml-3">Register</span>
+                    </button>
+                    <p className="mt-6 text-base font-roboto text-gray-600 text-center">
+                      Already have an account?{" "}
+                      <Link to="/login">
+                        {" "}
+                        <span className="text-blue-900 font-semibold">
+                          Log in
+                        </span>
+                      </Link>
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
