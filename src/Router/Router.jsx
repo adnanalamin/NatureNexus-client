@@ -4,6 +4,9 @@ import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Dashbord from "../Layout/Dashbord";
+import Profile from "../Pages/Dashbord/Profile/Profile";
+import AddedPackage from "../Pages/Dashbord/AddedPackage/AddedPackage";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +15,7 @@ const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        index: true,
+        path: '/',
         element: <Home></Home>,
       },
       {
@@ -25,6 +28,20 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path:'/dashbord',
+    element: <Dashbord></Dashbord>,
+    children:[
+      {
+        path: '/dashbord/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashbord/addedPackage',
+        element: <AddedPackage></AddedPackage>
+      }
+    ]
+  }
 ]);
 
 export default router;
