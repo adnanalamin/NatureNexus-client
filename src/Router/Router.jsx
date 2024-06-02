@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import Dashbord from "../Layout/Dashbord";
 import Profile from "../Pages/Dashbord/Profile/Profile";
 import AddedPackage from "../Pages/Dashbord/AddedPackage/AddedPackage";
+import Users from "../Pages/Dashbord/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/dashbord/addedPackage',
         element: <AddedPackage></AddedPackage>
+      },
+      {
+        path: '/dashbord/users',
+        element: <Users></Users>
       }
     ]
   }

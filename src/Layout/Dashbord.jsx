@@ -4,6 +4,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FaUserCheck } from "react-icons/fa";
 import { LuPackagePlus } from "react-icons/lu";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { HiUserGroup } from "react-icons/hi";
+
 
 const Dashbord = () => {
   const { user } = useContext(AuthContext);
@@ -32,11 +34,19 @@ const Dashbord = () => {
                     </span>
                   </NavLink>
                 </li>
-                <li className="text-white font-roboto font-bold hover:text-blue-400">
+                <li className="text-white mb-2 font-roboto font-bold hover:text-blue-400">
                   <NavLink to="/dashbord/addedPackage">
                     <span className="flex items-center gap-2">
                       <LuPackagePlus />
                       Add Package
+                    </span>
+                  </NavLink>
+                </li>
+                <li className="text-white mb-2 font-roboto font-bold hover:text-blue-400">
+                  <NavLink to="/dashbord/users">
+                    <span className="flex items-center gap-2">
+                      <HiUserGroup />
+                      User
                     </span>
                   </NavLink>
                 </li>
