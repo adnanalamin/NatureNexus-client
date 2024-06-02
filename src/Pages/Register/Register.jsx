@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "./../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -101,6 +102,7 @@ const Register = () => {
                   Hey enter your details to create your account
                 </p>
               </div>
+              <SocialLogin></SocialLogin>
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full flex-1 mt-8"
