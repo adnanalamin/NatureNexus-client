@@ -96,8 +96,8 @@ const Navbar = () => {
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#2C3892] rounded-box w-52">
             <li className="text-white pl-2 font-roboto font-semibold text-sm">{user.displayName}</li>
             <li className="text-white pl-2 font-roboto font-semibold text-sm">{user.email}</li>
-              <li className="text-white font-roboto font-semibold text-base"><Link to='/dashbord'> Dashboard</Link></li>
-              <li className="text-white font-roboto font-semibold text-base"><Link to='/profile'>Profile</Link></li>
+              <li className="text-white font-roboto font-semibold text-base"><Link to='/dashbord/profile'> Dashboard</Link></li>
+              
               <li className="text-white font-roboto font-semibold text-base"><a onClick={handelLogout}>Logout</a></li>
             </ul>
           </div>

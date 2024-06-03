@@ -5,10 +5,12 @@ import { FaUserCheck } from "react-icons/fa";
 import { LuPackagePlus } from "react-icons/lu";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { HiUserGroup } from "react-icons/hi";
+import useAdmin from "./../Hooks/useAdmin";
 
 
 const Dashbord = () => {
   const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin()
   return (
     <div>
       <div className="md:flex md:h-screen bg-gray-100">
@@ -34,6 +36,7 @@ const Dashbord = () => {
                     </span>
                   </NavLink>
                 </li>
+               {isAdmin && <>
                 <li className="text-white mb-2 font-roboto font-bold hover:text-blue-400">
                   <NavLink to="/dashbord/addedPackage">
                     <span className="flex items-center gap-2">
@@ -50,6 +53,7 @@ const Dashbord = () => {
                     </span>
                   </NavLink>
                 </li>
+               </>}
               </ul>
             </nav>
           </div>
@@ -73,6 +77,7 @@ const Dashbord = () => {
                       alt="Tailwind CSS Navbar component"
                       src={user?.photoURL}
                     />
+                    
                   </div>
                 </div>
               </div>

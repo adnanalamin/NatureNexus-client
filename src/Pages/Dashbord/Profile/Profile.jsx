@@ -1,11 +1,51 @@
-
-
 const Profile = () => {
-    return (
-        <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere assumenda voluptatem maxime quos harum. Provident consequuntur numquam quasi excepturi et ipsa nemo minus eum quia sapiente soluta officiis accusamus qui doloribus quaerat, nisi aliquam animi porro. Sint, aspernatur! Distinctio accusamus consequuntur id. Totam in repellat odit quos dignissimos laboriosam exercitationem minima libero, veritatis iusto, ratione possimus molestias sequi. Laborum ipsum dolores, velit maxime repudiandae inventore laboriosam temporibus dicta! Cum ipsam qui libero cumque dolor reprehenderit sint omnis assumenda sit suscipit, iste repellendus in ad hic distinctio temporibus quaerat facere aliquid veritatis! Tempore nobis dignissimos unde dolore esse fugiat dolores, iure repellendus ex, recusandae tempora nulla facere provident corrupti maiores minima a? Maiores sunt aliquam autem ipsa! Inventore mollitia ad beatae ducimus reiciendis illo nobis quisquam asperiores ea. Perferendis nam doloremque, ipsam, minima assumenda, illum maiores quas ullam aliquam aliquid consequuntur velit voluptate. Vel ipsa in possimus, quis culpa distinctio molestias quod ut sint, velit dolorem fuga! Sunt voluptatem aliquam perferendis, repellat impedit doloribus dolore minus magni maxime, eaque rem explicabo dolor necessitatibus nemo quae deleniti. Modi nemo suscipit accusamus aspernatur dicta illum excepturi sit quae aliquid quaerat voluptate ex cumque magni, rem accusantium cum odio aut hic delectus nisi? Nam debitis minima, unde quod perferendis quos consequatur magnam sapiente dolorum voluptatem autem tempora, maiores ut qui nihil blanditiis odio? Recusandae obcaecati pariatur tenetur sit illum in labore, odio provident incidunt dicta vero veniam, perspiciatis accusantium suscipit molestiae modi eos libero asperiores voluptas! Fugit, et. Quia, voluptatibus itaque nemo vel at harum quibusdam dolor! Eius, rerum numquam nemo repudiandae praesentium odit minima ab cum ullam incidunt illum, eaque sit corporis accusamus, veritatis obcaecati. Hic perspiciatis debitis omnis culpa aperiam, modi dolorem voluptates, nam facilis sunt fugit harum perferendis asperiores. Placeat culpa nemo aliquid numquam harum, dolores fuga voluptatum asperiores vero laboriosam!</p>
+  return (
+    <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+      <div
+        id="profile"
+        className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0"
+      >
+        <div className="p-4 md:p-12 text-center lg:text-left">
+          <div
+            className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+            style={{
+              backgroundImage: "url('https://source.unsplash.com/MP0IUfwrn0A')",
+            }}
+          ></div>
+          <h1 className="text-3xl font-bold pt-8 lg:pt-0">Your Name</h1>
+          <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+          <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
+            What you do
+          </p>
+          <p className="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
+            Your Location - 25.0000° N, 71.0000° W
+          </p>
+          <p className="pt-8 text-sm">
+            Totally optional short description about yourself, what you do and
+            so on.
+          </p>
+          <div className="pt-12 pb-8">
+            <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+              Get In Touch
+            </button>
+          </div>
+          <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
+            <a
+              className="link"
+              href="#"
+              data-tippy-content="@facebook_handle"
+            ></a>
+          </div>
         </div>
-    );
+      </div>
+      <div className="w-full lg:w-2/5">
+        <img
+          src="https://source.unsplash.com/MP0IUfwrn0A"
+          className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Profile;

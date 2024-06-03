@@ -99,7 +99,9 @@ const Users = () => {
                 {newUser.role}
               </td>
 
-              <td className="px-6 py-4 whitespace-nowrap text-center">
+              {newUser.role === 'admin' ? <td className="px-6 py-4 whitespace-nowrap font-roboto font-bold text-center">
+                Admin
+              </td>: <td className="px-6 py-4 whitespace-nowrap text-center">
                 <button
                   onClick={() => handleMakeAdmin(newUser)}
                   className="px-4 py-2 font-medium font-poppins text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
@@ -118,7 +120,7 @@ const Users = () => {
                 >
                   Delete
                 </button>
-              </td>
+              </td>}
             </tr>
           ))}
         </tbody>
