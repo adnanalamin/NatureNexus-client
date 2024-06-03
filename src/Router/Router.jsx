@@ -8,6 +8,8 @@ import Dashbord from "../Layout/Dashbord";
 import Profile from "../Pages/Dashbord/Profile/Profile";
 import AddedPackage from "../Pages/Dashbord/AddedPackage/AddedPackage";
 import Users from "../Pages/Dashbord/Users/Users";
+import PrivetRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashbord',
-    element: <Dashbord></Dashbord>,
+    element: <PrivetRoute><Dashbord></Dashbord></PrivetRoute>,
     children:[
       {
         path: '/dashbord/profile',
@@ -39,11 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashbord/addedPackage',
-        element: <AddedPackage></AddedPackage>
+        element: <AdminRoute><AddedPackage></AddedPackage></AdminRoute>
       },
       {
         path: '/dashbord/users',
-        element: <Users></Users>
+        element: <AdminRoute><Users></Users></AdminRoute>
       }
     ]
   }
