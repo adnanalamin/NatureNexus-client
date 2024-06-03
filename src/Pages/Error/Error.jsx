@@ -2,7 +2,7 @@ const Error = () => {
   return (
     <div>
       Page not fount
-      
+     
 
     </div>
   );

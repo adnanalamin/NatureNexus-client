@@ -10,6 +10,7 @@ import AddedPackage from "../Pages/Dashbord/AddedPackage/AddedPackage";
 import Users from "../Pages/Dashbord/Users/Users";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
+import PackageDetails from "../Pages/PackageDetails/PackageDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/PackageDetails',
+        element:<PackageDetails></PackageDetails>
       }
     ],
   },
