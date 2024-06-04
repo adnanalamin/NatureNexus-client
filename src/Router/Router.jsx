@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <Register></Register>
       },
       {
-        path: '/PackageDetails',
+        path: '/PackageDetails/:_id',
         element:<PackageDetails></PackageDetails>
       }
     ],

@@ -1,9 +1,10 @@
 import { FiHeart } from "react-icons/fi";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const PackagesCard = ({packege}) => {
-  const {tourType, title, price, image} = packege;
+  const {_id, tourType, title, price, image} = packege;
   return (
     <div>
       <div className="w-full ">
@@ -43,9 +44,11 @@ const PackagesCard = ({packege}) => {
               </p>
             </div>
             <div className="px-6 py-4 mb-auto">
+              <Link to={`/PackageDetails/${_id}`}>
               <button className="btn w-full font-poppins font-semibold bg-[#2C3892] hover:bg-[#3945a1] text-white">
                 View Package
               </button>
+              </Link>
             </div>
           </div>
         </div>

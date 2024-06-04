@@ -1,14 +1,285 @@
+import { useParams } from "react-router-dom";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import PhotoGallery from "../../Components/PhotoGallery/PhotoGallery";
-
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const PackageDetails = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const { _id } = useParams();
+  const axiosPublic = useAxiosPublic();
+  const { data: packaged = [], isLoading } = useQuery({
+    queryKey: ["package"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/packageDetails/${_id}`);
+      return res.data;
+    },
+  });
+
+  if (isLoading)
     return (
-        <div>
-            <BannerPhoto name={'Package Details'}></BannerPhoto>
-            <PhotoGallery></PhotoGallery>
-        </div>
+      <div className=" flex h-screen items-center">
+        <span className="loading loading-bars loading-lg mx-auto "></span>
+      </div>
     );
+
+  const handleBookNowClick = () => {
+    setShowModal(true);
+  };
+
+  return (
+    <div>
+      <BannerPhoto name={"Package Details"}></BannerPhoto>
+      <PhotoGallery></PhotoGallery>
+      <div className="lg:max-w-7xl lg:mx-auto">
+        <h3 className="mb-6 mt-8 text-teal-900 font-roboto text-center text-3xl font-semibold underline decoration-teal-200/80 ">
+          Package Details
+        </h3>
+        <div className="font-sans bg-white">
+          <div className="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
+            <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
+              <div className="lg:col-span-3 w-full lg:sticky top-0 text-center">
+                <div className="bg-teal-600/80 px-1 py-1 rounded-xl">
+                  <img
+                    src={packaged.image}
+                    alt="Product"
+                    className="w-full rounded object-cover h-[500px] mx-auto"
+                  />
+                </div>
+              </div>
+
+              <div className="lg:col-span-2">
+                <h2 className="text-3xl font-bold text-black font-roboto">
+                  {packaged.title}
+                </h2>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    Price :{" "}
+                  </p>
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    ${packaged.price}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    Location :{" "}
+                  </p>
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    {packaged.location}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    Type of tour :{" "}
+                  </p>
+                  <p className="text-black text-xl font-semibold font-roboto">
+                    {packaged.tourType}
+                  </p>
+                </div>
+                <div className="mt-6">
+                  <h3 className="mb-1 text-black font-roboto  text-xl font-semibold ">
+                    Descriptions :
+                  </h3>
+                  <p className="font-roboto ml-6 font-semibold">
+                    {packaged.description}
+                  </p>
+                </div>
+
+                <section
+                  id="faq"
+                  className="container relative mx-auto py-12 px-2"
+                >
+                  <h3 className="mb-6 text-teal-900 font-roboto  text-3xl font-semibold underline decoration-teal-200/80 ">
+                    Day Plan
+                  </h3>
+                  {packaged.dayPlaner.map((newItem, index) => (
+                    <div key={newItem._id} className="my-6">
+                      <div className="rounded-t-2xl bg-teal-600/80  w-full cursor-pointer select-none border-2 border-teal-600/30 px-4 py-4 text-gray-100 transition duration-300 hover:border-teal-600/80 hover:text-white">
+                        <h4 className="text-lg font-roboto font-medium">
+                          <span className="font-roboto bg-teal-800 px-6 py-2 mr-2 rounded-lg">
+                            Day-{index + 1}
+                          </span>{" "}
+                          {newItem.daytitle}
+                        </h4>
+                      </div>
+                      <div className="inline-flex w-full font-roboto rounded-b-2xl border-x-2 border-b-2 border-dashed border-teal-600/30 bg-teal-100/50 px-4 py-4 text-teal-800">
+                        <h5>{newItem.daydescription}</h5>
+                      </div>
+                    </div>
+                  ))}
+                </section>
+
+                <div className="w-full mt-4">
+                  <button
+                    onClick={handleBookNowClick}
+                    type="button"
+                    className="w-full px-4 py-3 bg-teal-600/80 font-roboto text-white hover:bg-teal-700  text-lg font-bold rounded"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {showModal && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+
+            <div
+              className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-headline"
+            >
+              <div className="px-4 py-5 sm:px-6">
+                <h3 className="mb-6 text-teal-900 text-center font-roboto  text-3xl font-semibold underline decoration-teal-200/80 ">
+                  Booking Form
+                </h3>
+                <div className="">
+                  <form>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="name"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Tourist Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="Adnan"
+                        readOnly
+                        className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
+                        required
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="name"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Tourist Email
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="Adnan@gmail.com"
+                        readOnly
+                        className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
+                        required
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="name"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Tourist image URL
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="Adnanfdnakj"
+                        readOnly
+                        className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
+                        required
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="age"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Price
+                      </label>
+                      <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
+                        required
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="age"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Tour Date
+                      </label>
+                      <div className="w-full">
+                        <DatePicker
+                          className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="gender"
+                        className="block text-black font-roboto font-bold mb-2"
+                      >
+                        Tour guide name
+                      </label>
+                      <select
+                        id="gender"
+                        name="gender"
+                        className="border text-black font-roboto font-bold border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
+                        required
+                      >
+                        <option value="">Tour guide name</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <button
+                        type="submit"
+                        className="w-full px-4 py-3 bg-teal-600/80 font-roboto text-white hover:bg-teal-700  text-lg font-bold rounded"
+                      >
+                        Booking
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-4 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600/80 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default PackageDetails;
