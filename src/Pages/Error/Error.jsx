@@ -3,7 +3,7 @@ const Error = () => {
     <div>
       Page not fount
      
-
+                     
     </div>
   );
 };

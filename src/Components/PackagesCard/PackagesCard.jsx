@@ -1,18 +1,20 @@
 import { FiHeart } from "react-icons/fi";
 import { MdOutlineAttachMoney } from "react-icons/md";
+import PropTypes from "prop-types";
 
-const PackagesCard = () => {
+const PackagesCard = ({packege}) => {
+  const {tourType, title, price, image} = packege;
   return (
     <div>
       <div className="w-full ">
         <div className="">
-          <div className="rounded overflow-hidden shadow-lg flex flex-col">
+          <div className="rounded overflow-hidden shadow-lg flex flex-col ">
             <a href="#"></a>
             <div className="relative">
               <a href="#">
                 <img
-                  className="w-full"
-                  src="https://images.pexels.com/photos/61180/pexels-photo-61180.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500"
+                  className="w-full h-72"
+                  src={image}
                   alt="Sunset in the mountains"
                 />
                 <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
@@ -26,17 +28,17 @@ const PackagesCard = () => {
               <h3 className="text-base font-roboto font-medium mb-2">
                 {" "}
                 Tour Type{" "}
-                <div className="badge badge-info text-white gap-2">info</div>
+                <div className="badge badge-info text-white gap-2">{tourType}</div>
               </h3>
               <h3 className="text-lg font-roboto font-semibold mb-2">
-                Simplest Salad Recipe ever
+                {title}
               </h3>
               <p className="flex gap-3 items-center text-base font-roboto font-medium">
                 Price :{" "}
                 <span className="flex gap-1 items-center">
                   {" "}
                   <MdOutlineAttachMoney className="text-xl text-info"></MdOutlineAttachMoney>{" "}
-                  360
+                  {price}
                 </span>
               </p>
             </div>
@@ -51,5 +53,7 @@ const PackagesCard = () => {
     </div>
   );
 };
-
+PackagesCard.propTypes = {
+  packege: PropTypes.object.isRequired,
+};
 export default PackagesCard;

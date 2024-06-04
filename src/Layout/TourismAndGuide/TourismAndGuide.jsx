@@ -3,7 +3,17 @@ import "react-tabs/style/react-tabs.css";
 import video from "../../assets/video/video.mp4";
 import PackagesCard from "../../Components/PackagesCard/PackagesCard";
 import MeetTourGuides from "../../Components/MeetTourGuides/MeetTourGuides";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 const TourismAndGuide = () => {
+  const axiosPublic = useAxiosPublic();
+  const { data: packeges = [] } = useQuery({
+    queryKey: ["packeges"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/packege");
+      return res.data.slice(0, 3);
+    },
+  });
   return (
     <div className="lg:max-w-7xl lg:mx-auto">
       <div>
@@ -21,9 +31,21 @@ const TourismAndGuide = () => {
         <Tabs>
           <div className="flex items-center justify-center ">
             <TabList>
-              <Tab><span className="font-poppins font-semibold text-base">Overview</span></Tab>
-              <Tab><span className="font-poppins font-semibold text-base">Our Packages</span></Tab>
-              <Tab><span className="font-poppins font-semibold text-base">Meet Our Tour Guides</span></Tab>
+              <Tab>
+                <span className="font-poppins font-semibold text-base">
+                  Overview
+                </span>
+              </Tab>
+              <Tab>
+                <span className="font-poppins font-semibold text-base">
+                  Our Packages
+                </span>
+              </Tab>
+              <Tab>
+                <span className="font-poppins font-semibold text-base">
+                  Meet Our Tour Guides
+                </span>
+              </Tab>
             </TabList>
           </div>
 
@@ -37,12 +59,17 @@ const TourismAndGuide = () => {
           </TabPanel>
           <TabPanel>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 md:gap-4 gap-4">
-              <PackagesCard></PackagesCard>
-              <PackagesCard></PackagesCard>
-              <PackagesCard></PackagesCard>
+              {packeges.map((newPackage) => (
+                <PackagesCard
+                  key={newPackage._id}
+                  packege={newPackage}
+                ></PackagesCard>
+              ))}
             </div>
             <div className="text-center mt-10 ">
-              <button className="btn w-2/4 font-poppins font-semibold text-base text-white bg-[#2C3892] hover:bg-[#3945a1]">All Packages</button>
+              <button className="btn w-2/4 font-poppins font-semibold text-base text-white bg-[#2C3892] hover:bg-[#3945a1]">
+                All Packages
+              </button>
             </div>
           </TabPanel>
           <TabPanel>
