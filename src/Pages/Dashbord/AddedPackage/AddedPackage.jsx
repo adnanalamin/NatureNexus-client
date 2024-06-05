@@ -67,7 +67,6 @@ const AddedPackage = () => {
         return;
       }
     }
-    console.log(imageUrl);
 
     const packageInfo = {
       title: formData.title,

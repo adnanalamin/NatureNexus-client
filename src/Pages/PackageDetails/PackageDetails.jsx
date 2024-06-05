@@ -1,21 +1,37 @@
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import PhotoGallery from "../../Components/PhotoGallery/PhotoGallery";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const PackageDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [selectedGuidId, setSelectedGuidId] = useState('');
+  const [price, setPrice] = useState('');
+  const [tourGuide, setTourGuide] = useState('');
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const {user} = useContext(AuthContext)
+  const navigate = useNavigate();
   const { _id } = useParams();
   const axiosPublic = useAxiosPublic();
   const { data: packaged = [], isLoading } = useQuery({
     queryKey: ["package"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/packageDetails/${_id}`);
+      return res.data;
+    },
+  });
+
+  const { data: tourGuid = [] } = useQuery({
+    queryKey: ["tourGuid"],
+    queryFn: async () => {
+      const res = await axiosPublic.get('/findGuide/');
       return res.data;
     },
   });
@@ -29,6 +45,38 @@ const PackageDetails = () => {
 
   const handleBookNowClick = () => {
     setShowModal(true);
+  };
+
+  
+
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    setSelectedGuidId(value);
+    if (value) {
+      navigate(`/dashbord/profile/${value}`);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const bookingInfo = {
+      name: user.displayName,
+      email: user.email,
+      image: user.photoURL,
+      price,
+      tourDate : startDate.toLocaleDateString(),
+      tourGuide,
+    };
+    try {
+      const bookingPackage = await axiosPublic.post("/booking", bookingInfo);
+      if (bookingPackage.data.insertedId) {
+        toast.success("Booking successfully");
+        setShowModal(false);
+        setShowConfirmationModal(true);
+      }
+    } catch (error) {
+      toast.error("Failed to Booking package: " + error.message);
+    }
   };
 
   return (
@@ -88,6 +136,26 @@ const PackageDetails = () => {
                     {packaged.description}
                   </p>
                 </div>
+                <div className="mt-6">
+                  <h3 className="mb-1 text-black font-roboto  text-xl font-semibold ">
+                  Tour guide :
+                  </h3>
+                  
+                  <select
+                        id="gender"
+                        name="gender"
+                        onChange={handleSelectChange}
+                        className="border ml-6 text-black font-roboto font-bold border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
+                        required
+                      >
+                        <option value="">Tour guide name</option>
+                        {
+                          tourGuid.map(guid => <option key={guid._id} value={guid._id}>{guid.name}</option>)
+                        }
+                        
+                      </select>
+                </div>
+                
 
                 <section
                   id="faq"
@@ -112,6 +180,8 @@ const PackageDetails = () => {
                     </div>
                   ))}
                 </section>
+
+                
 
                 <div className="w-full mt-4">
                   <button
@@ -152,7 +222,7 @@ const PackageDetails = () => {
                   Booking Form
                 </h3>
                 <div className="">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                       <label
                         htmlFor="name"
@@ -164,7 +234,7 @@ const PackageDetails = () => {
                         type="text"
                         id="name"
                         name="name"
-                        value="Adnan"
+                        value={user.displayName}
                         readOnly
                         className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
                         required
@@ -181,7 +251,7 @@ const PackageDetails = () => {
                         type="text"
                         id="name"
                         name="name"
-                        value="Adnan@gmail.com"
+                        value={user.email}
                         readOnly
                         className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
                         required
@@ -198,7 +268,7 @@ const PackageDetails = () => {
                         type="text"
                         id="name"
                         name="name"
-                        value="Adnanfdnakj"
+                        value={user.photoURL}
                         readOnly
                         className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none "
                         required
@@ -215,6 +285,7 @@ const PackageDetails = () => {
                         type="number"
                         id="age"
                         name="age"
+                        onChange={(e) => setPrice(e.target.value)}
                         className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                         required
                       />
@@ -231,6 +302,7 @@ const PackageDetails = () => {
                           className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                           selected={startDate}
                           onChange={(date) => setStartDate(date)}
+                          dateFormat="dd/MM/YYYY"
                         />
                       </div>
                     </div>
@@ -244,13 +316,15 @@ const PackageDetails = () => {
                       <select
                         id="gender"
                         name="gender"
+                        onChange={(e) => setTourGuide(e.target.value)}
                         className="border text-black font-roboto font-bold border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                         required
                       >
                         <option value="">Tour guide name</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        {
+                          tourGuid.map(guid => <option key={guid._id} value={guid.email}>{guid.name}</option>)
+                        }
+                        
                       </select>
                     </div>
 
@@ -278,6 +352,35 @@ const PackageDetails = () => {
           </div>
         </div>
       )}
+      {showConfirmationModal && (
+  <div className="fixed z-10 inset-0 overflow-y-auto">
+    {/* Modal backdrop */}
+    <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div className="fixed inset-0 transition-opacity">
+        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      {/* Modal content */}
+      <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="mb-6 text-teal-900 text-center font-roboto text-3xl font-semibold underline decoration-teal-200/80">Confirm your Booking</h3>
+          
+          <p>Click <Link to="" className="text-teal-600 hover:underline">here</Link> to view your bookings.</p>
+        </div>
+        <div className="bg-gray-50 px-4 py-4 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button
+            type="button"
+            onClick={() => setShowConfirmationModal(false)}
+            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600/80 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+      
     </div>
   );
 };

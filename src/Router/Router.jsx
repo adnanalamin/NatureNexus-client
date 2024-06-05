@@ -11,6 +11,7 @@ import Users from "../Pages/Dashbord/Users/Users";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import PackageDetails from "../Pages/PackageDetails/PackageDetails";
+import MyTour from "../Pages/Dashbord/MyTour/MyTour";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: '/dashbord/users',
         element: <AdminRoute><Users></Users></AdminRoute>
+      },
+      {
+        path: '/dashbord/MyTour',
+        element: <MyTour></MyTour>
       }
     ]
   }
