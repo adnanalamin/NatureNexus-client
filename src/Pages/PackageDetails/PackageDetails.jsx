@@ -354,13 +354,13 @@ const PackageDetails = () => {
       )}
       {showConfirmationModal && (
   <div className="fixed z-10 inset-0 overflow-y-auto">
-    {/* Modal backdrop */}
+    
     <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div className="fixed inset-0 transition-opacity">
         <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
       </div>
       <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-      {/* Modal content */}
+     
       <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div className="px-4 py-5 sm:px-6">
           <h3 className="mb-6 text-teal-900 text-center font-roboto text-3xl font-semibold underline decoration-teal-200/80">Confirm your Booking</h3>
