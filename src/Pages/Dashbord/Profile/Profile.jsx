@@ -2,13 +2,13 @@ import { useContext, useState } from "react";
 import useAxiosPublic from "./../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const email = user.email;
   const axiosPublic = useAxiosPublic();
   const [showModal, setShowModal] = useState(false);
-  const [userData, setUserData] = useState([]);
   const [profileData, setProfileData] = useState({
     phone: "",
     address: "",
@@ -42,11 +42,18 @@ const Profile = () => {
         toast.success("Profile Update successfully");
         setShowModal(false);
       }
-      setUserData(response.data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  const { data: userProfileData = [] } = useQuery({
+    queryKey: ["userProfileData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/findusers/${email}`);
+      return res.data;
+    },
+  });
 
   return (
     <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
@@ -56,40 +63,65 @@ const Profile = () => {
       >
         <div className="p-4 md:p-12 text-center lg:text-left">
           <h1 className="text-3xl font-bold font-roboto text-black pt-8 lg:pt-0">
-            {userData.name}
+            {userProfileData.name}
           </h1>
           <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
           <p className="pt-4 text-base font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
-            Email : kk
+            Email : {userProfileData.email}
           </p>
-          <p className="pt-2  text-xs font-roboto text-black lg:text-sm flex items-center justify-center lg:justify-start">
-            aaa
+          <p className="pt-2  text-xs font-roboto text-black font-bold lg:text-sm flex items-center justify-center lg:justify-start">
+            User Role :{" "}
+            <span className="badge badge-accent font-roboto font-semibold text-black ml-3">
+              {userProfileData.role || "User"}{" "}
+            </span>
           </p>
-          <p className="pt-8 text-sm">
-            Totally optional short description about yourself, what you do and
-            so on.
+
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Address : {userProfileData.address || "Please update Profile"}
           </p>
-          <div className="pt-12 pb-8">
-            <button
-              onClick={handleUpdateProfile}
-              className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full"
-            >
-              Update profile
-            </button>
-          </div>
-          <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
-            <a
-              className="link"
-              href="#"
-              data-tippy-content="@facebook_handle"
-            ></a>
-          </div>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            City : {userProfileData.city || "Please update Profile"}
+          </p>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Age : {userProfileData.age || "Please update Profile"}
+          </p>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Education : {userProfileData.education || "Please update Profile"}
+          </p>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Gender : {userProfileData.gender || "Please update Profile"}
+          </p>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Skills : {userProfileData.skills || "Please update Profile"}
+          </p>
+          <p className="text-base pt-2 font-roboto text-black font-bold flex items-center justify-center lg:justify-start">
+            Work Experience :{" "}
+            {userProfileData.workExperience || "Please update Profile"}
+          </p>
+
+          <p className="pt-4 text-black font-semibold font-roboto">
+            {userProfileData.aboutUser || "Please update Profile"}
+          </p>
+          {!userProfileData.city && (
+            <div className="pt-6 pb-2">
+              <h4 className="text-xs mb-2 font-roboto text-red-700">
+                Welcome! It looks like you are visiting for the first time.
+                Please update your profile.
+              </h4>
+              <button
+                onClick={handleUpdateProfile}
+                className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Update profile
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      <div className="w-full lg:w-2/5">
+      <div className="w-full lg:w-2/5 ">
         <img
-          src={userData.image}
-          className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
+          src={userProfileData.photo}
+          className="rounded-none lg:rounded-lg w-full shadow-2xl hidden lg:block"
         />
       </div>
       {showModal && (
