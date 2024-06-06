@@ -4,6 +4,7 @@ const Error = () => {
       Page not fount
       
 
+
     </div>
   );
 };

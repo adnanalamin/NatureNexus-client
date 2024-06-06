@@ -12,6 +12,7 @@ import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import PackageDetails from "../Pages/PackageDetails/PackageDetails";
 import MyTour from "../Pages/Dashbord/MyTour/MyTour";
+import UserProfileGuide from "../Pages/UserProfileGuide/UserProfileGuide";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/PackageDetails/:_id',
-        element:<PackageDetails></PackageDetails>
+        element:<PrivetRoute><PackageDetails></PackageDetails></PrivetRoute>
+      },
+      {
+        path: '/userGuidProfile/:_id',
+        element: <PrivetRoute><UserProfileGuide></UserProfileGuide></PrivetRoute>
       }
     ],
   },
