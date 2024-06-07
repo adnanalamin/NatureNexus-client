@@ -2,18 +2,31 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const MyBooking = () => {
   const { user } = useContext(AuthContext);
   const email = user.email;
   const axiosPublic = useAxiosPublic();
-  const { data: bookingtData = [] } = useQuery({
+  const { data: bookingtData = [], refetch } = useQuery({
     queryKey: ["bookingtData"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/getbooking/${email}`);
       return res.data;
     },
   });
+  const handelCancelBooking = (newData) => {
+    axiosPublic.delete(`/deletebooking/${newData._id}`).then((res) => {
+      refetch();
+      if (res.data.deletedCount > 0) {
+        Swal.fire({
+          title: "Canceled!",
+          text: "Booking has been Cancel.",
+          icon: "success",
+        });
+      }
+    });
+  };
   return (
     <div>
       <table className="min-w-full divide-y divide-gray-200">
@@ -60,7 +73,10 @@ const MyBooking = () => {
               <td className="px-6 py-4 whitespace-nowrap text-center">
                 {(newData.status === "In Review" ||
                   newData.status === "Rejected") && (
-                  <button className="px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">
+                  <button
+                    onClick={() => handelCancelBooking(newData)}
+                    className="px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+                  >
                     Cancel
                   </button>
                 )}

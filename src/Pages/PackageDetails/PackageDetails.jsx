@@ -17,7 +17,7 @@ const PackageDetails = () => {
   const [tourGuide, setTourGuide] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { user } = useContext(AuthContext);
-  console.log(tourGuide)
+  console.log(tourGuide);
   const { _id } = useParams();
   console.log(_id);
   const axiosPublic = useAxiosPublic();
@@ -54,14 +54,14 @@ const PackageDetails = () => {
       name: user.displayName,
       email: user.email,
       image: user.photoURL,
-      packageName : packaged.title,
-      packageId : packaged._id,
+      packageName: packaged.title,
+      packageId: packaged._id,
       price,
       tourDate: startDate.toLocaleDateString(),
       tourGuide,
-      status: "In Review"
+      status: "In Review",
     };
-    console.log(bookingInfo)
+    console.log(bookingInfo);
     try {
       const bookingPackage = await axiosPublic.post("/booking", bookingInfo);
       if (bookingPackage.data.insertedId) {
@@ -374,7 +374,10 @@ const PackageDetails = () => {
 
                 <p>
                   Click{" "}
-                  <Link to="" className="text-teal-600 hover:underline">
+                  <Link
+                    to="/dashbord/myBooking"
+                    className="text-teal-600 font-roboto font-semibold hover:underline"
+                  >
                     here
                   </Link>{" "}
                   to view your bookings.
