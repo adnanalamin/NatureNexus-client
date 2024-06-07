@@ -1,4 +1,4 @@
-import { Link,  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import PhotoGallery from "../../Components/PhotoGallery/PhotoGallery";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -17,9 +17,9 @@ const PackageDetails = () => {
   const [tourGuide, setTourGuide] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { user } = useContext(AuthContext);
-  // const navigate = useNavigate();
+  console.log(tourGuide)
   const { _id } = useParams();
-  console.log(_id)
+  console.log(_id);
   const axiosPublic = useAxiosPublic();
   const { data: packaged = [], isLoading } = useQuery({
     queryKey: ["package"],
@@ -48,18 +48,20 @@ const PackageDetails = () => {
     setShowModal(true);
   };
 
- 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const bookingInfo = {
       name: user.displayName,
       email: user.email,
       image: user.photoURL,
+      packageName : packaged.title,
+      packageId : packaged._id,
       price,
       tourDate: startDate.toLocaleDateString(),
       tourGuide,
+      status: "In Review"
     };
+    console.log(bookingInfo)
     try {
       const bookingPackage = await axiosPublic.post("/booking", bookingInfo);
       if (bookingPackage.data.insertedId) {
@@ -135,28 +137,27 @@ const PackageDetails = () => {
                   </h3>
                   <div className="">
                     <ul className="">
-                    {tourGuid.map((guid, index) => (
-                      <li className="shadow rounded-md" key={guid._id}>
-                      <Link to={`/userGuidProfile/${guid._id}`}>
-                        <div  className="flex items-center py-4 px-6">
-                        <span className="text-gray-700 text-lg font-medium mr-4">
-                        {index+1}
-                      </span>
-                      <img
-                        className="w-12 h-12 rounded-full object-cover mr-4"
-                        src={guid.photo}
-                        alt="User avatar"
-                      />
-                      <div className="flex-1">
-                        <h3 className="text-lg font-medium text-gray-800">
-                        {guid.name}
-                        </h3>
-                      </div>
-                        </div>
-                      </Link>
-                    </li>
-                    ))}
-                      
+                      {tourGuid.map((guid, index) => (
+                        <li className="shadow rounded-md" key={guid._id}>
+                          <Link to={`/userGuidProfile/${guid._id}`}>
+                            <div className="flex items-center py-4 px-6">
+                              <span className="text-gray-700 text-lg font-medium mr-4">
+                                {index + 1}
+                              </span>
+                              <img
+                                className="w-12 h-12 rounded-full object-cover mr-4"
+                                src={guid.photo}
+                                alt="User avatar"
+                              />
+                              <div className="flex-1">
+                                <h3 className="text-lg font-medium text-gray-800">
+                                  {guid.name}
+                                </h3>
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -324,7 +325,7 @@ const PackageDetails = () => {
                       >
                         <option value="">Tour guide name</option>
                         {tourGuid.map((guid) => (
-                          <option key={guid._id} value={guid.email}>
+                          <option key={guid._id} value={guid.name}>
                             {guid.name}
                           </option>
                         ))}

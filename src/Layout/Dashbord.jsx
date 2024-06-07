@@ -76,7 +76,7 @@ const Dashboard = () => {
                 ) : (
                   <>
                   <li className="text-white mb-2 font-roboto font-bold hover:text-blue-400">
-                    <NavLink to="">
+                    <NavLink to="/dashbord/myBooking">
                       <span className="flex items-center gap-2">
                         <FaTasks />
                         My Bookings

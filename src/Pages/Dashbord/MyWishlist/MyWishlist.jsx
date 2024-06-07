@@ -88,7 +88,7 @@ const MyWishlist = () => {
               <td className="px-6 py-4 whitespace-nowrap font-roboto font-semibold text-center">
                 <button
                   onClick={() => handleViewPackege(newData.packageId)}
-                  className="px-4 py-2  text-white font-roboto font-semibold bg-[#135D66] rounded-md hover:bg-[#135c66d0] focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+                  className="px-4 py-2  text-white font-roboto font-semibold bg-[#135D66] rounded-md hover:bg-[#135c66d0] focus:outline-none focus:shadow-outline-blue  transition duration-150 ease-in-out"
                 >
                   Visit Details
                 </button>
