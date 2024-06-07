@@ -19,6 +19,7 @@ const PackageDetails = () => {
   const { user } = useContext(AuthContext);
   // const navigate = useNavigate();
   const { _id } = useParams();
+  console.log(_id)
   const axiosPublic = useAxiosPublic();
   const { data: packaged = [], isLoading } = useQuery({
     queryKey: ["package"],
@@ -47,13 +48,7 @@ const PackageDetails = () => {
     setShowModal(true);
   };
 
-  // const handleSelectChange = (event) => {
-  //   const value = event.target.value;
-  //   setSelectedGuidId(value);
-  //   if (value) {
-  //     navigate(`/dashbord/profile/${value}`);
-  //   }
-  // };
+ 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
