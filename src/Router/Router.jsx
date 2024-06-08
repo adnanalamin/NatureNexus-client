@@ -17,6 +17,7 @@ import MyWishlist from "../Pages/Dashbord/MyWishlist/MyWishlist";
 import MyBooking from "../Pages/Dashbord/MyBooking/MyBooking";
 import RequestTourGuid from "../Pages/Dashbord/RequestTourGuid/RequestTourGuid";
 import StoryView from "../Pages/StoryView/StoryView";
+import AllPackage from "../Pages/AllPackage/AllPackage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/storyView/:_id',
         element: <PrivetRoute><StoryView></StoryView></PrivetRoute>
+      },
+      {
+        path: '/allPackage',
+        element: <PrivetRoute><AllPackage></AllPackage></PrivetRoute>
       }
     ],
   },

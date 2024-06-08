@@ -5,6 +5,7 @@ import PackagesCard from "../../Components/PackagesCard/PackagesCard";
 import MeetTourGuides from "../../Components/MeetTourGuides/MeetTourGuides";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 const TourismAndGuide = () => {
   const axiosPublic = useAxiosPublic();
   const { data: packeges = [] } = useQuery({
@@ -30,7 +31,7 @@ const TourismAndGuide = () => {
       <div className="mt-16">
         <Tabs>
           <div className="flex items-center justify-center ">
-            <TabList>
+            <TabList className="flex md:flex-row flex-col justify-center">
               <Tab>
                 <span className="font-poppins font-semibold text-base">
                   Overview
@@ -67,9 +68,11 @@ const TourismAndGuide = () => {
               ))}
             </div>
             <div className="text-center mt-10 ">
+              <Link to='/allPackage'>
               <button className="btn w-2/4 font-poppins font-semibold text-base text-white bg-[#2C3892] hover:bg-[#3945a1]">
                 All Packages
               </button>
+              </Link>
             </div>
           </TabPanel>
           <TabPanel>

@@ -1,11 +1,11 @@
 import banner from "../../assets/image/banner.jpg";
 const Banner = () => {
   return (
-    <div className="lg:max-w-7xl lg:mx-auto">
+    <div className="lg:max-w-7xl lg:mx-auto w-full mb-12 md:mb-0">
       <div className="hero min-h-screen bg-white">
         <div className="hero-content flex-1 lg:mr-8 flex-col lg:flex-row-reverse">
           <svg
-            className="w-[500px]"
+            className="md:w-[500px] w-full"
             viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -16,7 +16,7 @@ const Banner = () => {
                 width="200"
                 height="200"
               >
-                <image href={banner} x="0" y="0" width="200" height="200" />
+                <image className="lg:w-[200px] md:w-full w-full" href={banner} x="0" y="0"  height="200" />
               </pattern>
             </defs>
             <g className="clip-path:url(#clip0_103_21)">
@@ -28,7 +28,7 @@ const Banner = () => {
           </svg>
 
           <div className="flex-1">
-            <h1 className="text-5xl font-bold font-roboto">
+            <h1 className="md:text-5xl text-3xl font-bold font-roboto">
               Find and Review the Best{" "}
               <span className="text-[#51ADE5]"> Travel Guides Worldwide</span>
             </h1>
