@@ -18,6 +18,7 @@ import MyBooking from "../Pages/Dashbord/MyBooking/MyBooking";
 import RequestTourGuid from "../Pages/Dashbord/RequestTourGuid/RequestTourGuid";
 import StoryView from "../Pages/StoryView/StoryView";
 import AllPackage from "../Pages/AllPackage/AllPackage";
+import AllStory from "../Pages/AllStory/AllStory";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/allPackage',
         element: <PrivetRoute><AllPackage></AllPackage></PrivetRoute>
+      },
+      {
+        path: '/allStory',
+        element: <PrivetRoute><AllStory></AllStory></PrivetRoute>
       }
     ],
   },
