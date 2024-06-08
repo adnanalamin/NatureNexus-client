@@ -42,12 +42,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <h3
                   className=" text-white font-poppins hover:text-gray-900"
-                >
-                   About Us
-                </a>
+                > 
+                   <Link to='/aboutus'>About Us</Link>
+                </h3>
               </li>
               <li>
                 <h3

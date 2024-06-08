@@ -35,7 +35,7 @@ const Navbar = () => {
       <NavLink>
         <li className="font-poppins font-semibold text-base mr-4">Blogs</li>
       </NavLink>
-      <NavLink>
+      <NavLink to='/aboutus'>
         <li className="font-poppins font-semibold text-base mr-4">About Us</li>
       </NavLink>
       <NavLink to='/contactUs'>

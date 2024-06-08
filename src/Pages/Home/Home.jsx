@@ -3,6 +3,7 @@ import CategoryTourType from "../../Layout/CategoryTourType/CategoryTourType";
 import StorySection from "../../Layout/StorySection/StorySection";
 import TourismAndGuide from "../../Layout/TourismAndGuide/TourismAndGuide";
 import ScrollToTop from "react-scroll-to-top";
+import WhyChoose from "../../Layout/WhyChoose/WhyChoose";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <TourismAndGuide></TourismAndGuide>
       <CategoryTourType></CategoryTourType>
       <StorySection></StorySection>
+      <WhyChoose></WhyChoose>
       <ScrollToTop
         viewBox="0 0 50 50"
         svgPath="M11.4,39.7L24.9,26c0.6-0.6,1.6-0.6,2.2,0l13.5,13.7c0.6,0.6,0.6,1.6,0,2.2l-2.2,2.2
