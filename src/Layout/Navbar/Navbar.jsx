@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const navitems = (
     <>
-      <NavLink>
+      <NavLink to='/'>
         <li className="font-poppins font-semibold text-base mr-4">Home</li>
       </NavLink>
       <NavLink>
@@ -38,7 +38,7 @@ const Navbar = () => {
       <NavLink>
         <li className="font-poppins font-semibold text-base mr-4">About Us</li>
       </NavLink>
-      <NavLink>
+      <NavLink to='/contactUs'>
         <li className="font-poppins font-semibold text-base mr-4">
           Contact Us
         </li>

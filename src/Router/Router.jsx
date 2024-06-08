@@ -20,6 +20,7 @@ import StoryView from "../Pages/StoryView/StoryView";
 import AllPackage from "../Pages/AllPackage/AllPackage";
 import AllStory from "../Pages/AllStory/AllStory";
 import TourType from "../Pages/TourType/TourType";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: '/tuorType/:tourType',
         element: <PrivetRoute><TourType></TourType></PrivetRoute>
+      },
+      {
+        path: '/contactUs',
+        element: <ContactUs></ContactUs>
       }
     ],
   },

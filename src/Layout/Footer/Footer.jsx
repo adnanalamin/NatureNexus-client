@@ -2,6 +2,7 @@ import logo from "../../assets/Logo.png";
 import { FaTwitter, FaYoutube } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -49,12 +50,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <h3
                   className=" text-white font-poppins hover:text-gray-900"
                 >
-                  Contact Us
-                </a>
+                  <Link to='/contactUs'>Contact Us</Link>
+                </h3>
               </li>
             </ul>
             <div className="flex space-x-10 justify-center items-center mb-14">
