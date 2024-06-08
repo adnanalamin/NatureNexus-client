@@ -19,6 +19,7 @@ import RequestTourGuid from "../Pages/Dashbord/RequestTourGuid/RequestTourGuid";
 import StoryView from "../Pages/StoryView/StoryView";
 import AllPackage from "../Pages/AllPackage/AllPackage";
 import AllStory from "../Pages/AllStory/AllStory";
+import TourType from "../Pages/TourType/TourType";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: '/allStory',
         element: <PrivetRoute><AllStory></AllStory></PrivetRoute>
+      },
+      {
+        path: '/tuorType/:tourType',
+        element: <PrivetRoute><TourType></TourType></PrivetRoute>
       }
     ],
   },

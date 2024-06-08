@@ -1,6 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 import ToureCategoryCard from "../../Components/ToureCategoryCard/ToureCategoryCard";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import background from "../../assets/image/ParallaxBanner.jpg"
 const CategoryTourType = () => {
+  const axiosPublic = useAxiosPublic()
+  const { data: tourTypeData = [] } = useQuery({
+    queryKey: ["tourTypeData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/tourtype");
+      return res.data;
+    },
+  });
   return (
     <div className=" mt-32">
       <div className="mb-24">
@@ -24,15 +34,10 @@ const CategoryTourType = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content lg:max-w-7xl lg:mx-auto">
           <div className="">
-            <div className="grid  md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
-                <ToureCategoryCard></ToureCategoryCard>
+            <div className="grid  md:grid-cols-3 lg:grid-cols-3 gap-4 mt-10">
+              {
+                tourTypeData.map(data => <ToureCategoryCard key={data._id} data={data}></ToureCategoryCard>)
+              }
             </div>
           </div>
         </div>

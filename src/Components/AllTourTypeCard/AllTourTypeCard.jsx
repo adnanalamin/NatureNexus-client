@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-const AllPackageCard = ({ data }) => {
+const AllTourTypeCard = ({ data }) => {
   const { _id, title, image, tourType, price } = data;
   return (
-    <div className="font-roboto">
-      <div className="bg-white grid sm:grid-cols-2 items-center mx-auto shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-full max-w-xl rounded-lg h-52  overflow-hidden mt-4">
+    <div>
+      <div className="bg-white grid sm:grid-cols-2 items-center shadow-[0_2px_18px_-6px_rgba(0,0,0,0.2)] w-full max-w-xl rounded-lg font-[sans-serif] overflow-hidden mx-auto h-52 mt-4">
         <img src={image} className="w-full h-full" alt="Card" />
         <div className="px-4 py-6">
           <h3 className="text-xl font-semibold">{title}</h3>
@@ -25,7 +25,7 @@ const AllPackageCard = ({ data }) => {
     </div>
   );
 };
-AllPackageCard.propTypes = {
+AllTourTypeCard.propTypes = {
   data: PropTypes.object.isRequired,
 };
-export default AllPackageCard;
+export default AllTourTypeCard;
