@@ -16,6 +16,7 @@ import UserProfileGuide from "../Pages/UserProfileGuide/UserProfileGuide";
 import MyWishlist from "../Pages/Dashbord/MyWishlist/MyWishlist";
 import MyBooking from "../Pages/Dashbord/MyBooking/MyBooking";
 import RequestTourGuid from "../Pages/Dashbord/RequestTourGuid/RequestTourGuid";
+import StoryView from "../Pages/StoryView/StoryView";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/userGuidProfile/:_id',
         element: <PrivetRoute><UserProfileGuide></UserProfileGuide></PrivetRoute>
+      },
+      {
+        path: '/storyView/:_id',
+        element: <PrivetRoute><StoryView></StoryView></PrivetRoute>
       }
     ],
   },

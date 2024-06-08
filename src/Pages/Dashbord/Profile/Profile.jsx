@@ -3,6 +3,7 @@ import useAxiosPublic from "./../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import UserTourStoryForm from "../../../Components/UserTourStoryForm/UserTourStoryForm";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -322,6 +323,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {(userProfileData.role === " " || !userProfileData.role) && (
+       <UserTourStoryForm></UserTourStoryForm>
       )}
     </div>
   );

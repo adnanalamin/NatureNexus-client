@@ -1,8 +1,11 @@
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const StorySection = () => {
+  const axiosPublic = useAxiosPublic()
   const [sliderRef] = useKeenSlider(
     {
       loop: true,
@@ -38,6 +41,23 @@ const StorySection = () => {
       },
     ]
   );
+  const { data: storyData = [] } = useQuery({
+    queryKey: ["storyData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/getStorys");
+      return res.data;
+    },
+  });
+
+  function truncateText(text, maxLength) {
+    const words = text.split(' ');
+    if (words.length > maxLength) {
+      return words.slice(0, maxLength).join(' ') + '...';
+    } else {
+      return text;
+    }
+  }
+  
   return (
     <div className="lg:max-w-7xl lg:mx-auto mt-32">
       <div>
@@ -47,86 +67,33 @@ const StorySection = () => {
 
       </div>
       <div ref={sliderRef} className="keen-slider mt-24">
-        <div className="keen-slider__slide number-slide1">
-          <Link>
-            <blockquote className="flex flex-col items-center p-4">
-              <h3 className="max-w-4xl text-lg text-[#3a3a3ac2] font-roboto  font-medium text-center md:text-2xl lg:text-3xl">
-                recently used this website for a purchase and I was extremely
-                satisfied with the ease of use and the variety of options
-                available. The checkout process was seamless and the delivery
-                was prompt.
-              </h3>
-              <footer className="flex items-center gap-3 mt-6 md:mt-12">
-                <img
-                  className="flex-shrink-0 w-20 h-20 border p-1 bg-[#51ADE5] rounded-full border-black/10"
-                  src="https://loremflickr.com/g/200/200/girl"
-                  alt="Sebastiaan Kloos"
-                  loading="lazy"
-                />
-                <a
-                  href=""
-                  target="_blank"
-                  className="inline-block font-bold tracking-tight"
-                >
-                  <p>Jane Doe</p>
-                  <p className="font-medium text-black/60">Founder of XYZ</p>
-                </a>
-              </footer>
-            </blockquote>
-          </Link>
-        </div>
-        <div className="keen-slider__slide number-slide2">
-          <blockquote className="flex flex-col items-center p-4">
-            <p className="max-w-4xl text-xl font-medium text-center md:text-2xl lg:text-3xl">
-              I recently used this website for a purchase and I was extremely
-              satisfied with the ease of use and the variety of options
-              available. The checkout process was seamless and the delivery was
-              prompt.
-            </p>
-            <footer className="flex items-center gap-3 mt-6 md:mt-12">
-              <img
-                className="flex-shrink-0 w-12 h-12 border rounded-full border-black/10"
-                src="https://loremflickr.com/g/200/200/girl"
-                alt="Sebastiaan Kloos"
-                loading="lazy"
-              />
-              <a
-                href=""
-                target="_blank"
-                className="inline-block font-bold tracking-tight"
-              >
-                <p>Jane Doe</p>
-                <p className="font-medium text-black/60">Founder of XYZ</p>
-              </a>
-            </footer>
-          </blockquote>
-        </div>
-        <div className="keen-slider__slide number-slide3">
-          <blockquote className="flex flex-col items-center p-4">
-            <p className="max-w-4xl text-xl font-medium text-center md:text-2xl lg:text-3xl">
-              I recently used this website for a purchase and I was extremely
-              satisfied with the ease of use and the variety of options
-              available. The checkout process was seamless and the delivery was
-              prompt.
-            </p>
-            <footer className="flex items-center gap-3 mt-6 md:mt-12">
-              <img
-                className="flex-shrink-0 w-12 h-12 border rounded-full border-black/10"
-                src="https://loremflickr.com/g/200/200/girl"
-                alt="Sebastiaan Kloos"
-                loading="lazy"
-              />
-              <a
-                href=""
-                target="_blank"
-                className="inline-block font-bold tracking-tight"
-              >
-                <p>Jane Doe</p>
-                <p className="font-medium text-black/60">Founder of XYZ</p>
-              </a>
-            </footer>
-          </blockquote>
-        </div>
+        {
+          storyData.map(newStory => <div key={newStory._id} className="keen-slider__slide">
+            <Link to={`/storyView/${newStory._id}`}>
+              <blockquote className="flex flex-col items-center p-4">
+                <h3 className="max-w-4xl text-lg text-[#3a3a3ac2] font-roboto  font-medium text-center md:text-2xl lg:text-3xl">
+                {truncateText(newStory.tourDetails, 40)}
+                </h3>
+                <footer className="flex items-center gap-3 mt-6 md:mt-12">
+                  <img
+                    className="flex-shrink-0 w-20 h-20 border p-1 bg-[#51ADE5] rounded-full border-black/10"
+                    src={newStory.userPhoto}
+                    alt="Sebastiaan Kloos"
+                    loading="lazy"
+                  />
+                  <a
+                    href=""
+                    target="_blank"
+                    className="inline-block font-bold text-3xl tracking-tight"
+                  >
+                    <p>{newStory.userName}</p>
+                  </a>
+                </footer>
+              </blockquote>
+            </Link>
+          </div>)
+        }
+        
       </div>
     </div>
   );
