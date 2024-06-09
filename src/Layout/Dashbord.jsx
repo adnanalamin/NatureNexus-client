@@ -66,7 +66,7 @@ const Dashboard = () => {
                   </>
                 ) : isGuide ? (
                   <li className="text-white mb-2 font-roboto font-bold hover:text-blue-400">
-                    <NavLink to="/dashbord/MyTour">
+                    <NavLink to="/dashbord/MyAssignedTours">
                       <span className="flex items-center gap-2">
                         <FaAnglesRight />
                         My Assigned Tours

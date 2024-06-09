@@ -1,7 +1,10 @@
+import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
+
 const Community = () => {
   return (
     <div>
-      <div className="font-[sans-serif] text-[#333]">
+      <BannerPhoto name={'Community'}></BannerPhoto>
+      <div className="font-roboto mt-20 text-[#333]">
         <div className="max-w-5xl mx-auto">
           
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-10 text-center mt-12">

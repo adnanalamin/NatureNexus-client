@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@egjs/react-flicking": "^4.11.3",
-    "@tanstack/react-query": "^5.40.0",
+    "@tanstack/react-query": "^5.40.1",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "keen-slider": "^6.8.6",

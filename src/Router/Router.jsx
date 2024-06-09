@@ -24,6 +24,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
 import Community from "../Pages/Community/Community";
+import MyAssignedTours from "../Pages/Dashbord/MyAssignedTours/MyAssignedTours";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: '/dashbord/requstTourGuide',
         element: <RequestTourGuid></RequestTourGuid>
+      },
+      {
+        path: '/dashbord/MyAssignedTours',
+        element: <MyAssignedTours></MyAssignedTours>
       }
     ]
   }
