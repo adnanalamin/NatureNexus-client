@@ -88,7 +88,7 @@ const Users = () => {
     }
   };
   return (
-    <div>
+    <div className="overflow-x-auto">
       <div className="flex flex-col justify-between w-full mb-4 md:flex-row gap-3">
         <div className="w-full md:w-3/12">
           <select

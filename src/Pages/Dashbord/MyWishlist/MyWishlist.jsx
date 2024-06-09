@@ -76,11 +76,11 @@ const MyWishlist = () => {
     }
   };
   return (
-    <div className="font-roboto">
-      <div className="mt-6 mb-12 w-full mx-auto text-center">
+    <div className="font-roboto overflow-x-auto">
+      <div className="mt-6 mb-12 w-full mx-auto text-center overflow-x-auto">
         <h3 className="font-bold text-3xl w-full mx-auto">My Wishlist</h3>
       </div>
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
         <thead>
           <tr>
             <th className="px-6 py-3 text-left font-roboto font-semibold text-xs  text-gray-500 uppercase tracking-wider">
