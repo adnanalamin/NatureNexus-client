@@ -34,12 +34,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <h3
                   className=" text-white font-poppins hover:text-gray-900"
                 >
-                  Blogs
-                </a>
+                  <Link to='/blog'>Blogs</Link>
+                </h3>
               </li>
               <li>
                 <h3

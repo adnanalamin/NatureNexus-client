@@ -22,6 +22,7 @@ import AllStory from "../Pages/AllStory/AllStory";
 import TourType from "../Pages/TourType/TourType";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import Blog from "../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: '/aboutus',
         element: <AboutUs></AboutUs>
+      },
+      {
+        path: '/blog',
+        element: <Blog></Blog>
       }
     ],
   },

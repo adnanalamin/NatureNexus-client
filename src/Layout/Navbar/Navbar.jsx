@@ -32,7 +32,7 @@ const Navbar = () => {
       <NavLink>
         <li className="font-poppins font-semibold text-base mr-4">Community</li>
       </NavLink>
-      <NavLink>
+      <NavLink to='/blog'>
         <li className="font-poppins font-semibold text-base mr-4">Blogs</li>
       </NavLink>
       <NavLink to='/aboutus'>
