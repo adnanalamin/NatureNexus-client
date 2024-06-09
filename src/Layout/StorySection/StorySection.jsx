@@ -3,6 +3,7 @@ import "keen-slider/keen-slider.min.css";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import TouristStoryCard from "../../Components/TouristStoryCard/TouristStoryCard";
 
 const StorySection = () => {
   const axiosPublic = useAxiosPublic();
@@ -49,14 +50,6 @@ const StorySection = () => {
     },
   });
 
-  function truncateText(text, maxLength) {
-    const words = text.split(" ");
-    if (words.length > maxLength) {
-      return words.slice(0, maxLength).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   return (
     <div className="lg:max-w-7xl lg:mx-auto mt-32">
@@ -68,28 +61,7 @@ const StorySection = () => {
       <div ref={sliderRef} className="keen-slider mt-24">
         {storyData.map((newStory) => (
           <div key={newStory._id} className="keen-slider__slide">
-            <Link to={`/storyView/${newStory._id}`}>
-              <blockquote className="flex flex-col items-center p-4">
-                <h3 className="max-w-4xl text-lg text-[#3a3a3ac2] font-roboto  font-medium text-center md:text-2xl lg:text-3xl">
-                  {truncateText(newStory.tourDetails, 40)}
-                </h3>
-                <footer className="flex items-center gap-3 mt-6 md:mt-12">
-                  <img
-                    className="flex-shrink-0 w-20 h-20 border p-1 bg-[#51ADE5] rounded-full border-black/10"
-                    src={newStory.userPhoto}
-                    alt="Sebastiaan Kloos"
-                    loading="lazy"
-                  />
-                  <a
-                    href=""
-                    target="_blank"
-                    className="inline-block font-bold text-3xl tracking-tight"
-                  >
-                    <p>{newStory.userName}</p>
-                  </a>
-                </footer>
-              </blockquote>
-            </Link>
+            <TouristStoryCard data={newStory}></TouristStoryCard>
           </div>
         ))}
       </div>

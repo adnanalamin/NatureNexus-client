@@ -23,6 +23,7 @@ import TourType from "../Pages/TourType/TourType";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
+import Community from "../Pages/Community/Community";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: '/blog',
         element: <Blog></Blog>
+      },
+      {
+        path: '/community',
+        element: <Community></Community>
       }
     ],
   },

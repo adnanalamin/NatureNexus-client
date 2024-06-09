@@ -26,12 +26,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <h3
                   className=" text-white font-poppins hover:text-gray-900"
                 >
-                  Community
-                </a>
+                  <Link to='/community'>Community</Link>
+                </h3>
               </li>
               <li>
                 <h3
