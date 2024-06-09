@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
@@ -7,14 +7,29 @@ import Swal from "sweetalert2";
 const MyAssignedTours = () => {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPages] = useState(10);
+  
 
   const { data: bookingData = [], refetch } = useQuery({
-    queryKey: ["bookingData"],
+    queryKey: ["bookingData", user.displayName, itemsPerPage, currentPage],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/myBooking/${user.displayName}`);
+      const res = await axiosPublic.get(
+        `/myBooking?name=${user.displayName}&size=${itemsPerPage}&page=${currentPage}`
+      );
       return res.data;
     },
   });
+
+  const { data: bookingCountData = 0 } = useQuery({
+    queryKey: ["bookingCount"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/myTotalBooking`);
+      return res.data.count;
+    },
+  });
+  const numberOfPages = Math.ceil(bookingCountData / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
 
   const handleReject = (id) => {
     axiosPublic.patch(`/booking/status/${id}`).then((res) => {
@@ -28,7 +43,21 @@ const MyAssignedTours = () => {
       }
     });
   };
-
+  const handelItemsPerPages = (e) => {
+    const val = parseInt(e.target.value);
+    setItemsPerPages(val);
+    setCurrentPage(0);
+  };
+  const handelPrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handelNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   const handleAccept = (id) => {
     axiosPublic.patch(`/acceptedbooking/status/${id}`).then((res) => {
       refetch();
@@ -108,16 +137,22 @@ const MyAssignedTours = () => {
 
           <div className="flex items-center max-md:mt-4">
             <p className="text-sm text-gray-500">Display</p>
-            <select className="text-sm text-gray-500 border border-gray-400 rounded h-7 mx-4 px-1 outline-none">
-              <option>5</option>
-              <option>10</option>
-              <option>20</option>
-              <option>50</option>
-              <option>100</option>
+            <select
+              onChange={handelItemsPerPages}
+              value={itemsPerPage}
+              className="text-sm text-gray-500 border border-gray-400 rounded h-7 mx-4 px-1 outline-none"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
             </select>
 
             <ul className="flex space-x-1 ml-2">
-              <li className="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+              <li
+                onClick={handelPrevPage}
+                className="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-3 fill-gray-500"
@@ -129,19 +164,23 @@ const MyAssignedTours = () => {
                   />
                 </svg>
               </li>
-              <li className="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
-                1
-              </li>
-              <li className="flex items-center justify-center cursor-pointer text-sm bg-[#007bff] text-white w-7 h-7 rounded">
-                2
-              </li>
-              <li className="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
-                3
-              </li>
-              <li className="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
-                4
-              </li>
-              <li className="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+              {pages.map((page) => (
+                <li
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={
+                    currentPage === page
+                      ? " flex items-center justify-center cursor-pointer text-sm bg-[#007bff] text-white w-7 h-7 rounded"
+                      : "flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded"
+                  }
+                >
+                  {page + 1}
+                </li>
+              ))}
+              <li
+                onClick={handelNextPage}
+                className="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-3 fill-gray-500 rotate-180"
