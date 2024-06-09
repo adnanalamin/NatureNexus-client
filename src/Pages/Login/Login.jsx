@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginImg from "../../assets/image/Login.jpg";
 import LoginPage from "../../assets/image/LoginP.jpg";
 import { useContext } from "react";
@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const {userSignIn} = useContext(AuthContext);
   const handleLogin = event => {
     event.preventDefault();
@@ -16,6 +18,7 @@ const Login = () => {
     userSignIn(email, password)
     .then(() => {
       toast.success('Login Successfull')
+      navigate(location?.state || '/')
       form.reset()
     })
       

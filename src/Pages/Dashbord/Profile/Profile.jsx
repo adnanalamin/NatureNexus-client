@@ -325,7 +325,7 @@ const Profile = () => {
         </div>
       )}
 
-      {(userProfileData.role === " " || !userProfileData.role) && (
+      {(userProfileData.role === "Tourist" || !userProfileData.role) && (
        <UserTourStoryForm></UserTourStoryForm>
       )}
     </div>

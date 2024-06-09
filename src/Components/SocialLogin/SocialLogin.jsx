@@ -4,8 +4,11 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const { googleLogin, githubLogin } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
@@ -14,10 +17,12 @@ const SocialLogin = () => {
       const userInfo = {
         email: result.user?.email,
         name: result.user?.displayName,
-        photo: result.user?.photoURL
+        photo: result.user?.photoURL,
+        role: 'Tourist'
       };
       axiosPublic.post("/users", userInfo).then(() => {
         toast.success("Login Successfull");
+        navigate(location?.state || "/");
       });
     });
   };
@@ -27,10 +32,12 @@ const SocialLogin = () => {
       const userInfo = {
         email: result.user?.email,
         name: result.user?.displayName,
-        photo: result.user?.photoURL
+        photo: result.user?.photoURL,
+        role: 'Tourist'
       };
       axiosPublic.post("/users", userInfo).then(() => {
         toast.success("Login Successfull");
+        navigate(location?.state || "/");
       });
     });
   };

@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/community',
-        element: <Community></Community>
+        element: <PrivetRoute><Community></Community></PrivetRoute>
       }
     ],
   },

@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link,  useLocation, useNavigate } from "react-router-dom";
 import registerImg from "../../assets/image/Login.jpg";
 import registerbg from "../../assets/image/register.png";
 import { FiUserPlus } from "react-icons/fi";
@@ -11,6 +11,8 @@ import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { createUser, updateUserProfile, user, setUser } =
     useContext(AuthContext);
   const {
@@ -22,51 +24,49 @@ const Register = () => {
   const onSubmit = async (data) => {
     const { name, photo, email, password } = data;
     await createUser(email, password)
-    .then(async ()=>{
-      await updateUserProfile(name, photo)
-      .then(() => {
-        setUser({ ...user?.user, photoURL: photo, displayName: name });
-        const userInfo = {
-          name: name,
-          email: email,
-          photo: photo,
-        };
-        axiosPublic.post("/users", userInfo).then((res) => {
-          if (res.data.insertedId) {
-            reset();
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "User created successfully.",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            Navigate("/");
-          }else{
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "User created successfully.",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
+      .then(async () => {
+        await updateUserProfile(name, photo).then(() => {
+          setUser({ ...user?.user, photoURL: photo, displayName: name });
+          const userInfo = {
+            name: name,
+            email: email,
+            photo: photo,
+            role: 'Tourist'
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              navigate(location?.state || "/");
+            } else {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
         });
       })
-      
-    })
-    .catch(error => {
-      const title = error.message.split(/[\]():)]+/);
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: title,
-        showConfirmButton: false,
-        timer: 3000,
+      .catch((error) => {
+        const title = error.message.split(/[\]():)]+/);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: title,
+          showConfirmButton: false,
+          timer: 3000,
+        });
       });
-    })
-    
-    
   };
   return (
     <div>
