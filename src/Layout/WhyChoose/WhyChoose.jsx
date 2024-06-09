@@ -1,4 +1,16 @@
+import { useSpring, animated, useScroll } from "react-spring";
 const WhyChoose = () => {
+  const { scrollYProgress } = useScroll();
+  const props = useSpring({
+    opacity: scrollYProgress,
+    transform: scrollYProgress.to(
+      (y) => `
+      scale(${0.8 + y * 0.2}) 
+      translateY(${y * 50}px)
+    `
+    ),
+    config: { mass: 1, tension: 50, friction: 10 },
+  });
   return (
     <div>
       <div className="lg:max-w-7xl mx-auto mt-12 font-roboto">
@@ -22,7 +34,10 @@ const WhyChoose = () => {
           </div>
 
           <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-md border shadow-md bg-white p-8 text-center ">
+            <animated.div
+              className="rounded-md border shadow-md bg-white p-8 text-center "
+              style={props}
+            >
               <div
                 className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                 style={{
@@ -39,7 +54,7 @@ const WhyChoose = () => {
                   height="24"
                   viewBox="0 0 24 24"
                   strokeWidth="2"
-                  stroke="white" // Change this line
+                  stroke="white"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -58,9 +73,12 @@ const WhyChoose = () => {
                 areas we explore; they are passionate about them. With years of
                 experience and a deep love for nature
               </p>
-            </div>
+            </animated.div>
 
-            <div className="rounded-md border shadow-md bg-white p-8 text-center ">
+            <animated.div
+              className="rounded-md border shadow-md bg-white p-8 text-center "
+              style={props}
+            >
               <div
                 className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                 style={{
@@ -91,9 +109,12 @@ const WhyChoose = () => {
                 the environment. That is why all of our tours and experiences
                 are designed with sustainability in mind
               </p>
-            </div>
+            </animated.div>
 
-            <div className="rounded-md border shadow-md bg-white p-8 text-center ">
+            <animated.div
+              className="rounded-md border shadow-md bg-white p-8 text-center "
+              style={props}
+            >
               <div
                 className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                 style={{
@@ -130,7 +151,7 @@ const WhyChoose = () => {
                 experiences that allow you to truly connect with the places you
                 visit
               </p>
-            </div>
+            </animated.div>
           </div>
         </section>
       </div>

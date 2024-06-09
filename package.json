@@ -12,11 +12,13 @@
   "dependencies": {
     "@egjs/react-flicking": "^4.11.3",
     "@tanstack/react-query": "^5.40.1",
+    "@use-gesture/react": "^10.3.1",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "keen-slider": "^6.8.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
     "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
@@ -26,6 +28,7 @@
     "react-scroll-to-top": "^3.0.0",
     "react-select": "^5.8.0",
     "react-share": "^5.1.0",
+    "react-spring": "^9.7.3",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
     "sweetalert2": "^11.11.0"

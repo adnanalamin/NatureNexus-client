@@ -76,7 +76,10 @@ const MyWishlist = () => {
     }
   };
   return (
-    <div>
+    <div className="font-roboto">
+      <div className="mt-6 mb-12 w-full mx-auto text-center">
+        <h3 className="font-bold text-3xl w-full mx-auto">My Wishlist</h3>
+      </div>
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>

@@ -8,11 +8,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import Confetti from "react-confetti";
 
 const PackageDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  // const [selectedGuidId, setSelectedGuidId] = useState("");
+  const [bookingCount, setBookingCount] = useState(0);
   const [price, setPrice] = useState("");
   const [tourGuide, setTourGuide] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -68,6 +69,7 @@ const PackageDetails = () => {
         toast.success("Booking successfully");
         setShowModal(false);
         setShowConfirmationModal(true);
+        setBookingCount(bookingCount + 1);
       }
     } catch (error) {
       toast.error("Failed to Booking package: " + error.message);
@@ -394,6 +396,31 @@ const PackageDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+      {bookingCount > 2 && (
+        <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50">
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+          <div className="bg-white shadow-[0_8px_12px_-6px_rgba(0,0,0,0.2)] border p-6 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
+            <h3 className="text-xl font-bold text-[#333]">Congratulations! 🎉</h3>
+            <p className="mt-4 text-sm text-gray-500">
+             You hve unlocked a special discount for being a loyal customer. Enjoy your savings and thank you for choosing us for your bookings!
+            </p>
+            <div className="relative flex items-center px-1 bg-gray-50 border-2 focus-within:border-[#007bff] focus-within:bg-white rounded mt-6">
+              <input
+                type="text"
+                placeholder="Enter Your code"
+                className="px-2 py-3 text-black w-full text-sm bg-transparent outline-none"
+              />
+              <button
+                type="button"
+                className="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+          {setTimeout(() => setBookingCount(0), 5000)}
         </div>
       )}
     </div>
