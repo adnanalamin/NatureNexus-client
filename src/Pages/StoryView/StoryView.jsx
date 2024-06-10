@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useLocation, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import { Helmet } from "react-helmet";
@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 const StoryView = () => {
   const { _id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const locations = useLocation();
 
   const { data: storyData = []} = useQuery({
     queryKey: ["storyData", _id],
@@ -76,12 +75,12 @@ const StoryView = () => {
             </div>
             <hr className="border-b-2 mt-6" />
             <div className="mt-4 flex gap-2">
-              <FacebookShareButton url={locations}>
+              <FacebookShareButton url={'https://naturenexus-232f7.web.app'}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Share on Facebook
                 </button>
               </FacebookShareButton>
-              <TwitterShareButton url={locations}>
+              <TwitterShareButton url={'https://naturenexus-232f7.web.app'}>
                 <button className="bg-[#1DA1F2] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Share on Twitter
                 </button>
