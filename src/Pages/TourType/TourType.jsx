@@ -3,6 +3,7 @@ import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import AllTourTypeCard from "../../Components/AllTourTypeCard/AllTourTypeCard";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const TourType = () => {
   const { tourType } = useParams();
@@ -19,6 +20,9 @@ const TourType = () => {
   }
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Tour Type</title>
+      </Helmet>
       <BannerPhoto name={tourType}></BannerPhoto>
       <div className="lg:max-w-7xl mx-auto">
         <div className="grid grid-cols-1  lg:grid-cols-2 gap-3 mt-12">

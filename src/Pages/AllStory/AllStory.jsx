@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import AllStoryCard from "../../Components/AllStoryCard/AllStoryCard";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const AllStory = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,6 +15,9 @@ const AllStory = () => {
   });
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | All Story</title>
+      </Helmet>
       <BannerPhoto name={"All Story"}></BannerPhoto>
       <div className="lg:max-w-7xl mx-auto mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

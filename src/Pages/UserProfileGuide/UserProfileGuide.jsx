@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const UserProfileGuide = () => {
   const { _id } = useParams();
@@ -14,6 +15,9 @@ const UserProfileGuide = () => {
   });
   return (
     <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+      <Helmet>
+      <title>Nature Nexus | User Profile</title>
+      </Helmet>
       <div
         id="profile"
         className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0"

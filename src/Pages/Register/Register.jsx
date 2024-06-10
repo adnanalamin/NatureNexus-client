@@ -8,6 +8,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "./../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -70,6 +71,9 @@ const Register = () => {
   };
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Register</title>
+      </Helmet>
       <div
         className="hero"
         style={{

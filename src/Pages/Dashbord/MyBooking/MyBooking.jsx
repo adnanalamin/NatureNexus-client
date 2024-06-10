@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const MyBooking = () => {
   const { user } = useContext(AuthContext);
@@ -56,6 +57,9 @@ const MyBooking = () => {
   };
   return (
     <div className="font-roboto overflow-x-auto">
+      <Helmet>
+      <title>Nature Nexus | My Booking</title>
+      </Helmet>
       <div className="mt-6 mb-12 w-full mx-auto text-center">
         <h3 className="font-bold text-3xl w-full mx-auto">My Booking</h3>
       </div>

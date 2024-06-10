@@ -133,7 +133,7 @@ const Dashboard = () => {
         <div className="md:flex md:flex-col  md:flex-1 ">
           <div className="navbar bg-base-300 md:px-9">
             <div className="flex-1">
-              <h2 className="text-xl font-roboto font-bold">daisyUI</h2>
+              <h2 className="text-xl font-roboto font-bold">{user?.displayName}</h2>
             </div>
             <div className="flex-none">
               <div className="dropdown dropdown-end"></div>

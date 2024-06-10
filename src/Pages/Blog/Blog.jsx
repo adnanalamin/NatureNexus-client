@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 
 const Blog = () => {
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Blog</title>
+      </Helmet>
       <BannerPhoto name={"Blog"}></BannerPhoto>
 
       <div className="flex flex-col p-5 lg:px-48 lg:py-11 font-roboto">

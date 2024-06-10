@@ -9,12 +9,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import Confetti from "react-confetti";
+import { Helmet } from "react-helmet";
 
 const PackageDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [bookingCount, setBookingCount] = useState(0);
-  const [price, setPrice] = useState("");
   const [tourGuide, setTourGuide] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { user } = useContext(AuthContext);
@@ -57,12 +57,11 @@ const PackageDetails = () => {
       image: user.photoURL,
       packageName: packaged.title,
       packageId: packaged._id,
-      price,
+      price: packaged.price,
       tourDate: startDate.toLocaleDateString(),
       tourGuide,
       status: "In Review",
     };
-    console.log(bookingInfo);
     try {
       const bookingPackage = await axiosPublic.post("/booking", bookingInfo);
       if (bookingPackage.data.insertedId) {
@@ -78,6 +77,9 @@ const PackageDetails = () => {
 
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Package Details</title>
+      </Helmet>
       <BannerPhoto name={"Package Details"}></BannerPhoto>
       <PhotoGallery></PhotoGallery>
       <div className="lg:max-w-7xl lg:mx-auto">
@@ -162,6 +164,28 @@ const PackageDetails = () => {
                       ))}
                     </ul>
                   </div>
+                </div>
+                <h3 className="mb-6 mt-6 text-teal-900 font-roboto  text-3xl font-semibold underline decoration-teal-200/80 ">
+                  Apply Coupon
+                </h3>
+
+                <div className="relative flex items-center px-1 bg-gray-50 border-2 focus-within:border-[#007bff] focus-within:bg-white rounded mt-6">
+                  <input
+                    type="text"
+                    placeholder="Enter Your code"
+                    className="px-2 py-3 text-black w-full text-sm bg-transparent outline-none"
+                  />
+
+                  <button
+                    className={`px-4 py-2 font-medium font-poppins text-white rounded-md transition duration-150 ease-in-out ${
+                      bookingCount < 3
+                        ? "bg-[#135D66] cursor-not-allowed"
+                        : "bg-[#135D66] hover:bg-[#135c66d0] focus:outline-none focus:shadow-outline-blue active:bg-blue-600"
+                    }`}
+                    disabled={bookingCount > 3}
+                  >
+                    Send
+                  </button>
                 </div>
 
                 <section
@@ -289,8 +313,8 @@ const PackageDetails = () => {
                       <input
                         type="number"
                         id="age"
-                        name="age"
-                        onChange={(e) => setPrice(e.target.value)}
+                        name="price"
+                        value={packaged.price}
                         className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                         required
                       />
@@ -402,25 +426,16 @@ const PackageDetails = () => {
         <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50">
           <Confetti width={window.innerWidth} height={window.innerHeight} />
           <div className="bg-white shadow-[0_8px_12px_-6px_rgba(0,0,0,0.2)] border p-6 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
-            <h3 className="text-xl font-bold text-[#333]">Congratulations! 🎉</h3>
+            <h3 className="text-xl font-bold text-[#333]">
+              Congratulations! 🎉
+            </h3>
             <p className="mt-4 text-sm text-gray-500">
-             You hve unlocked a special discount for being a loyal customer. Enjoy your savings and thank you for choosing us for your bookings!
+              You hve unlocked a special discount for being a loyal customer.
+              Enjoy your savings and thank you for choosing us for your
+              bookings!
             </p>
-            <div className="relative flex items-center px-1 bg-gray-50 border-2 focus-within:border-[#007bff] focus-within:bg-white rounded mt-6">
-              <input
-                type="text"
-                placeholder="Enter Your code"
-                className="px-2 py-3 text-black w-full text-sm bg-transparent outline-none"
-              />
-              <button
-                type="button"
-                className="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600"
-              >
-                Send
-              </button>
-            </div>
           </div>
-          {setTimeout(() => setBookingCount(0), 5000)}
+          {setTimeout(() => setBookingCount(0), 7000)}
         </div>
       )}
     </div>

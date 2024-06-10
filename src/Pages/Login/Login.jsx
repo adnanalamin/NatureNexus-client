@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -27,6 +28,9 @@ const Login = () => {
   }
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | LogIn</title>
+      </Helmet>
       <div
         className="hero"
         style={{

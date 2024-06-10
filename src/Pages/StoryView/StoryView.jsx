@@ -3,6 +3,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useLocation, useParams } from "react-router-dom";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
+import { Helmet } from "react-helmet";
 
 const StoryView = () => {
   const { _id } = useParams();
@@ -21,6 +22,9 @@ const StoryView = () => {
 
   return (
     <div className="font-roboto">
+      <Helmet>
+      <title>Nature Nexus | Story view</title>
+      </Helmet>
       <BannerPhoto name={"Story view"}></BannerPhoto>
       <div className="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
         <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">

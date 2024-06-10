@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 
 const Community = () => {
   return (
     <div>
       <BannerPhoto name={'Community'}></BannerPhoto>
+      <Helmet>
+      <title>Nature Nexus | Community</title>
+      </Helmet>
       <div className="font-roboto mt-20 text-[#333]">
         <div className="max-w-5xl mx-auto">
           

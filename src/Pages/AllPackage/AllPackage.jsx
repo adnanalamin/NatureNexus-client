@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import AllPackageCard from "../../Components/AllPackageCard/AllPackageCard";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const AllPackage = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,6 +15,9 @@ const AllPackage = () => {
   });
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | All Packages</title>
+      </Helmet>
       <BannerPhoto name={"All Package"}></BannerPhoto>
       <div className="lg:max-w-7xl md:max-w-full mx-auto">
         <div className="grid grid-cols-1  lg:grid-cols-2 gap-3 mt-12">

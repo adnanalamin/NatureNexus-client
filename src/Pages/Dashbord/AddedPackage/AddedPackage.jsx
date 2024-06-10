@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa6";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -103,6 +104,9 @@ const AddedPackage = () => {
 
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Add Package</title>
+      </Helmet>
       <div className="h-full">
         <div className="mx-auto">
           <div className="flex justify-center px-6 py-12">

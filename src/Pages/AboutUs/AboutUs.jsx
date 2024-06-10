@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 
 const AboutUs = () => {
   return (
     <div className="font-roboto">
+      <Helmet>
+      <title>Nature Nexus | About US</title>
+      </Helmet>
       <BannerPhoto name={"About US"}></BannerPhoto>
       <div className="lg:max-w-7xl mx-auto mt-12">
         <div id="about" className="relative bg-white overflow-hidden mt-16">

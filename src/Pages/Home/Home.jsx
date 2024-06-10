@@ -4,10 +4,14 @@ import StorySection from "../../Layout/StorySection/StorySection";
 import TourismAndGuide from "../../Layout/TourismAndGuide/TourismAndGuide";
 import ScrollToTop from "react-scroll-to-top";
 import WhyChoose from "../../Layout/WhyChoose/WhyChoose";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | Home</title>
+      </Helmet>
       <Banner></Banner>
       <TourismAndGuide></TourismAndGuide>
       <CategoryTourType></CategoryTourType>

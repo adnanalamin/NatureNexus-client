@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 
 
@@ -15,6 +16,9 @@ const RequestTourGuid = () => {
     };
     return (
         <div>
+            <Helmet>
+      <title>Nature Nexus | Request Tour Guid</title>
+      </Helmet>
              <div className="max-w-md mx-auto">
             <button
                 className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${buttonClicked ? 'opacity-50 cursor-not-allowed' : ''}`}

@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const MyAssignedTours = () => {
   const { user } = useContext(AuthContext);
@@ -72,6 +73,9 @@ const MyAssignedTours = () => {
   };
   return (
     <div>
+      <Helmet>
+      <title>Nature Nexus | My Assign Tour</title>
+      </Helmet>
       <div className="overflow-x-auto font-[sans-serif]">
         <table className="min-w-full bg-white">
           <thead className="bg-gray-100 whitespace-nowrap">

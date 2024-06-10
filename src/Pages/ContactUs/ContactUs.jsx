@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet";
 import BannerPhoto from "../../Components/BannerPhoto/BannerPhoto";
 
 const ContactUs = () => {
   return (
     <div>
       <BannerPhoto name={"Contact US"}></BannerPhoto>
+      <Helmet>
+      <title>Nature Nexus | Contact US</title>
+      </Helmet>
       <div className="font-[sans-serif] lg:max-w-7xl mx-auto mt-12">
         <div className="bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] my-6 p-8">
           <h2 className="text-2xl text-[#333] font-extrabold text-center mb-12">

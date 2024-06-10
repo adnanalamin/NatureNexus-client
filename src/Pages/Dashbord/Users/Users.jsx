@@ -2,6 +2,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const Users = () => {
   const [search, setSearch] = useState("");
@@ -89,6 +90,9 @@ const Users = () => {
   };
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+      <title>Nature Nexus | User</title>
+      </Helmet>
       <div className="flex flex-col justify-between w-full mb-4 md:flex-row gap-3">
         <div className="w-full md:w-3/12">
           <select

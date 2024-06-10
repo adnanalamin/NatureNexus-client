@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const MyWishlist = () => {
   const { user } = useContext(AuthContext);
@@ -77,6 +78,9 @@ const MyWishlist = () => {
   };
   return (
     <div className="font-roboto overflow-x-auto">
+      <Helmet>
+      <title>Nature Nexus | My WishList</title>
+      </Helmet>
       <div className="mt-6 mb-12 w-full mx-auto text-center overflow-x-auto">
         <h3 className="font-bold text-3xl w-full mx-auto">My Wishlist</h3>
       </div>
