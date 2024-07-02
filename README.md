@@ -72,3 +72,12 @@
 - **Pagination:** Implemented at the footer of all tables to show 10 users at a time.
 - **JWT Authentication:** Used for secure login and session management.
 - **Discount Message:** Animation to reveal a congratulations message and Apply button for users booking more than 3 times.
+
+- ## Installation
+
+To run the Study Squadron project locally, follow these steps:
+
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install`.
+4. Start the development server using `npm run deb`.
