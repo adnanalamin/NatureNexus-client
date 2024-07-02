@@ -73,7 +73,7 @@
 - **JWT Authentication:** Used for secure login and session management.
 - **Discount Message:** Animation to reveal a congratulations message and Apply button for users booking more than 3 times.
 
-- ## Installation
+## Installation
 
 To run the Study Squadron project locally, follow these steps:
 
